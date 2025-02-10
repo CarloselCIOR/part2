@@ -24,6 +24,7 @@ const Course = ({ course }) => {
         <Total parts={course.parts} />
     </div>)
 }
+
 const App = () => {
   const course = {
     id: 1,
