@@ -1,4 +1,7 @@
 import { useState } from 'react'
+import PersonForm from './components/PersonForm'
+import Filter from './components/Filter'
+import Persons from './components/Persons'
 
 const App = () => {
   const [persons, setPersons] = useState([
@@ -7,55 +10,19 @@ const App = () => {
     { name: 'Dan Abramov', number: '12-43-234345', id: 3 },
     { name: 'Mary Poppendieck', number: '39-23-6423122', id: 4 }
   ])
-  const [newName, setNewName] = useState('')
-  const [newNumber, setNewNumber] = useState('')
+
   const [findName, setFindName] = useState('')
-
-  const addPerson = (event) => {
-    if (persons.find(person => person.name === newName)) {
-      alert(`${newName} is already added to phonebook`)
-    } else {
-      event.preventDefault()
-      const nameObject = {
-        name: newName,
-        number: newNumber
-      }
-
-      setPersons(persons.concat(nameObject))
-      setNewName('')
-      setNewNumber('')
-    }
-  }
-
-  const handleNameFind = (event) => {
-    setFindName(event.target.value)
-  }
-
-  const handleNameChange = (event) => {
-    setNewName(event.target.value)
-  }
-
-  const handleNumberChange = (event) => {
-    setNewNumber(event.target.value)
-  }
 
   return (
     <div>
       <h2>Phonebook</h2>
-      <p>filter shown with <input value={findName} onChange={handleNameFind} /></p>
+      <Filter findName={findName} setFindName={setFindName} />
 
-      <form onSubmit={addPerson}>
-        <div>name: <input value={newName} onChange={handleNameChange} /></div>
-        <div>number: <input value={newNumber} onChange={handleNumberChange} /></div>
-        <div><button type="submit">add</button> </div>
-      </form>
+      <h3>add a new</h3>
+      <PersonForm persons={persons} setPersons={setPersons} />
 
-      <h2>Numbers</h2>
-      <div>
-        {persons.filter(person => person.name.toLowerCase().includes(findName.toLowerCase())).map(person =>
-          <p key={person.name}>{person.name} {person.number}</p>
-        )}
-      </div>
+      <h3>Numbers</h3>
+      <Persons persons={persons} findName={findName} />
     </div>
   )
 }
