@@ -21,6 +21,7 @@ const PersonForm = ({ persons={persons}, setPersons={setPersons} }) => {
                 name: newName,
                 number: newNumber,
                 id: persons.length + 1
+
             }
 
             setPersons(persons.concat(nameObject))
