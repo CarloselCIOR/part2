@@ -14,8 +14,14 @@ const create = newObject => {
 }
 
 const deletePerson = id => {
-  const request = axios.delete(`${baseUrl}/${id}`)
-    return request.then(response => response.data)
+    const request = axios.delete(`${baseUrl}/${id}`)
+    return request.then(response => {
+        if (response.status === 200) {
+            return `Person with id ${id} deleted successfully`
+        } else {
+            throw new Error(`Failed to delete person with id ${id}`)
+        }   
+    })
 }
 
 export default { getAll, create, deletePerson }
