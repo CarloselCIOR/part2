@@ -17,7 +17,16 @@ const PersonForm = ({ persons={persons}, setPersons={setPersons} }) => {
     const newPerson = (event) => {
         event.preventDefault()
         if (persons.find(person => person.name === newName)) {
-            alert(`${newName} is already added to phonebook`)
+            window.confirm(`${newName} is already added to phonebook, replace the old number with a new one?`) &&
+            personsService.put(persons.find(person => person.name === newName).id, { name: newName, number: newNumber })
+                .then(response => { 
+                    setPersons(persons.map(person => person.id !== response.id ? person : response))
+                    setNewName('')
+                    setNewNumber('')
+                })
+                .catch(error => {
+                    console.error('There was an error updating the person!', error);
+                });
         } else {
             const nameObject = {
                 name: newName,
