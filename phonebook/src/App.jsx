@@ -1,17 +1,19 @@
 import { useState, useEffect } from 'react'
 import PersonForm from './components/PersonForm'
 import Filter from './components/Filter'
-import Persons from './components/Persons'
-import axios from 'axios'
+import Persons from './components/Person'
+import personsservice from './services/persons'
 
 const App = () => {
   const [persons, setPersons] = useState([])
 
   useEffect(() => {
-    axios
-      .get('http://localhost:3001/persons')
-      .then(response => {
-        setPersons(response.data)
+    personsservice.getAll()
+      .then(initialPersons => {
+        setPersons(initialPersons)
+      })
+      .catch(error => {
+        console.error('There was an error fetching the persons!', error);
       })
   }, [])
 

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import personsService from '../services/persons';
 
 const PersonForm = ({ persons={persons}, setPersons={setPersons} }) => {
     const [newName, setNewName] = useState('')
@@ -22,14 +23,15 @@ const PersonForm = ({ persons={persons}, setPersons={setPersons} }) => {
                 name: newName,
                 number: newNumber
             }
-            axios.post('http://localhost:3001/persons', nameObject 
-            ).then(response => {
-                setPersons(persons.concat(response.data))
-                setNewName('')
-                setNewNumber('')
-            }).catch(error => {
-                console.error('There was an error adding the person!', error);
-            });
+            personsService.create(nameObject)
+                .then(response => {
+                    setPersons(persons.concat(response))
+                    setNewName('')
+                    setNewNumber('')
+                })
+                .catch(error => {
+                    console.error('There was an error creating the person!', error);
+                });
         }
     }
 
