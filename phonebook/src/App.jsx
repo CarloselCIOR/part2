@@ -8,7 +8,6 @@ import Notification from "./components/Notification";
 const App = () => {
   const [persons, setPersons] = useState([]);
   const [message, setMessage] = useState(null);
-  const [errorMessage, setErrorMessage] = useState(null);
 
   useEffect(() => {
     personsservice
@@ -28,10 +27,10 @@ const App = () => {
       <h1>Phonebook</h1>
       <Filter findName={findName} setFindName={setFindName} />
 
-      <Notification message={message} errorMessage={errorMessage} />
+      <Notification message={message}/>
 
       <h2>add a new</h2>
-      <PersonForm persons={persons} setPersons={setPersons} setMessage={setMessage} setErrorMessage={setErrorMessage}/>
+      <PersonForm persons={persons} setPersons={setPersons} setMessage={setMessage}/>
 
       <h3>Numbers</h3>
       <Persons persons={persons} findName={findName} setPersons={setPersons} />

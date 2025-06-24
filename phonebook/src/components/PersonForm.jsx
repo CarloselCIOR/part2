@@ -3,7 +3,7 @@ import axios from "axios";
 import personsService from "../services/persons";
 
 
-const PersonForm = ({ persons = { persons }, setPersons = { setPersons }, setMessage={setMessage}, setErrorMessage={setErrorMessage}}) => {
+const PersonForm = ({ persons = { persons }, setPersons = { setPersons }, setMessage={setMessage}}) => {
   const [newName, setNewName] = useState("");
   const [newNumber, setNewNumber] = useState("");
 
@@ -36,7 +36,10 @@ const PersonForm = ({ persons = { persons }, setPersons = { setPersons }, setMes
             setNewNumber("");
           })
           .catch((error) => {
-            console.error("Error updating person:", error);
+            setMessage(`Error: Information of ${newName} has already been removed from server`);
+            setTimeout(() => {
+              setMessage(null);
+            }, 5000);
           });
     } else {
       const nameObject = {
