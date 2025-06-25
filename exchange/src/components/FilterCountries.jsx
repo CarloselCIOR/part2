@@ -1,4 +1,4 @@
-const FilterCountries = ({countries, value}) => {
+const FilterCountries = ({countries, value, setValue}) => {
     
 const filteredCountries = countries.filter((country) =>
     country.name.common.toLowerCase().includes(value.toLowerCase())
@@ -27,7 +27,12 @@ const filteredCountries = countries.filter((country) =>
     }else{
         return(
             filteredCountries.map((country, index) =>(
-                <p key={index}>{country.name.common}</p>
+                <div key={index}>
+                    <p>{country.name.common}</p>
+                    <button onClick={() => 
+                        setValue(country.name.common)
+                    }>Show</button>
+                </div>
             ))
         )
     }

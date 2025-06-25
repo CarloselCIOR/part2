@@ -27,7 +27,7 @@ const App = () => {
       <p>find countries: </p>
       <input value={value} onChange={handleChange} />
 
-      <FilterCountries countries={countries} value={value}></FilterCountries>
+      <FilterCountries countries={countries} value={value} setValue={setValue}></FilterCountries>
 
     </div>
   );
