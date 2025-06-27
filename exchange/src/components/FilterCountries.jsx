@@ -1,3 +1,5 @@
+import Weather from "./Weather";
+
 const FilterCountries = ({countries, value, setValue}) => {
     
 const filteredCountries = countries.filter((country) =>
@@ -21,6 +23,8 @@ const filteredCountries = countries.filter((country) =>
                         ))}
                     </ul>
                     <img src= {country.flags.png} alt={`Bandera de ${country.name.common}`}></img>
+                        
+                    <Weather capital={country.capital} />
                 </div>
             ))
         )
